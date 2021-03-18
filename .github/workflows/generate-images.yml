@@ -29,14 +29,14 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - name: Build and push ${{ matrix.ecosystem }}-${{ matrix.version }}
+    - name: Build and push ${{ matrix.versions.ecosystem }}-${{ matrix.versions.version }}
       id: docker_build
       uses: docker/build-push-action@v2
       env:
-        VERSION: ${{ matrix.version }}
-        ECOSYSTEM : ${{ matrix.ecosystem }}
+        VERSION: ${{ matrix.versions.version }}
+        ECOSYSTEM : ${{ matrix.versions.ecosystem }}
       with:
-        file: ./${{ matrix.path }}}
+        file: ./${{ matrix.versions.path }}
         push: true
-        tags: ${{ matrix.tag }}
+        tags: ${{ matrix.versions.tag }}
         build-args: ECOSYSTEM_VERSION=$VERSION
