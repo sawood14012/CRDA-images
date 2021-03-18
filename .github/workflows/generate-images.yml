@@ -34,14 +34,15 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - name: Build and push ${{ matrix.versions.ecosystem }}-${{ matrix.versions.version }}
+    - name: Build and push ${{ matrix.versions.ecosystem }}-${{ matrix.versions.package }}
       id: docker_build
       uses: docker/build-push-action@v2
       env:
-        VERSION: ${{ matrix.versions.version }}
+        VERSION: ${{ matrix.versions.package }}
         ECOSYSTEM : ${{ matrix.versions.ecosystem }}
       with:
+        context: .
         file: ./${{ matrix.versions.path }}
         push: true
-        tags: ${{ matrix.versions.tag }}
+        tags: sawood14012/CRDA-images/${{ matrix.versions.tag }}
         build-args: ECOSYSTEM_VERSION=$VERSION
