@@ -11,10 +11,16 @@ jobs:
         versions:
           - ecosystem: python
             package:  python3
+            tag: crda/python3
+            path: Dockerfiles/Dockerfile.python
           - ecosystem: python
             package:  python36
+            tag: crda/python36
+            path: Dockerfiles/Dockerfile.python
           - ecosystem: python
             package:  python38
+            tag: crda/python38
+            path: Dockerfiles/Dockerfile.python
     steps:
     - uses: actions/checkout@v2
     - name: Login to GitHub Container Registry
@@ -30,7 +36,7 @@ jobs:
         VERSION: ${{ matrix.version }}
         ECOSYSTEM : ${{ matrix.ecosystem }}
       with:
-        file: ./Dockerfiles/Dockerfile.$ECOSYSTEM
+        file: ./${{ matrix.path }}}
         push: true
-        tags: dependency-analytics/$VERSION:latest
+        tags: ${{ matrix.tag }}
         build-args: ECOSYSTEM_VERSION=$VERSION
