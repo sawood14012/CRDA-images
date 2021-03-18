@@ -44,5 +44,5 @@ jobs:
         context: .
         file: ./${{ matrix.versions.path }}
         push: true
-        tags: sawood14012/crda-images/${{ matrix.versions.tag }}
+        tags: ghcr.io/sawood14012/crda-images/${{ matrix.versions.tag }}
         build-args: ECOSYSTEM_VERSION=$VERSION
