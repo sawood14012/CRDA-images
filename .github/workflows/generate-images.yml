@@ -45,4 +45,4 @@ jobs:
         file: ./${{ matrix.versions.path }}
         push: true
         tags: ghcr.io/sawood14012/crda-images/${{ matrix.versions.tag }}
-        build-args: ECOSYSTEM_VERSION=$VERSION
+        build-args: ECOSYSTEM_VERSION=${{ matrix.versions.package}}
